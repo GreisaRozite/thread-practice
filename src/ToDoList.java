@@ -30,14 +30,14 @@ public class ToDoList implements Iterable<Job>{
             long timeLeft = waitTime - System.currentTimeMillis(); // acts as a countdown
 
             if (timeLeft <= 0){
-                throw new EmptyToDoListException("Shutdown, no new jobs anticipated for five seconds.");
+                throw new EmptyToDoListException("Worker quit, no new jobs anticipated for five seconds.");
             }
 
             try {
                 wait(timeLeft); //waiting for notifyAll() when new job is added or countdown
             } catch (InterruptedException e) { // checked exception must be taken care of
                 Thread.currentThread().interrupt();
-                throw new EmptyToDoListException("A worker was interrupted!");
+                throw new EmptyToDoListException("Worker was ordered to quit");
             }
         }
         return queue.removeFirst();
