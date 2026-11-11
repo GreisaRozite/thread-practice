@@ -40,7 +40,7 @@ public class ToDoList implements Iterable<Job>{
                 throw new EmptyToDoListException("Worker was ordered to quit");
             }
         }
-        return queue.removeFirst();
+        return queue.remove(0);
     }
 
     @Override
